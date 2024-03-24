@@ -1,0 +1,91 @@
+@startuml
+skinparam Style StrictUML
+skinparam Linetype ortho 
+
+
+
+class Patient {
+    patientID: integer 
+    --
+    name: string
+    address: string
+    email: string
+    phone_num: string
+    gender: string
+    DOB: date
+    AGE<18: boolean
+    health_cond: string
+    Allergies: string
+}
+
+class Staff {
+    staffID: integer
+    --
+    name: string
+    address: string
+    email: string
+    phone_num: string
+    position: string
+    dateofemployment: date
+    IRDnum: string
+}
+
+class Bookings {
+    booking_id: integer
+    patient_id: integer
+    staff_id: integer
+    timedate: date
+    --
+    location: string
+    notes: string
+    procedure_id: integer
+}
+
+class Procedure {
+    procedure_id: integer
+    --
+    description: string
+    quantity: integer
+    grams: integer
+    timedate: date
+    cost: float
+    gst: float
+}
+
+class booking_procedures {
+    booking_id: integer
+    procedure_id: integer
+}
+
+class Schedule {
+    booking_id: integer
+    timedate: date
+    --
+    notes: string
+    bookings: string
+}
+
+class Payments {
+    booking_id: integer
+    patientID: integer
+    --
+    total_cost: float
+    daysinceoperation: integer
+    pay boolean: boolean
+}
+
+class cost_calculation {
+    user: string
+    booking_id: integer
+    --
+    age: integer
+}
+Patient ||-|{ Bookings
+Staff ||--|{ Bookings
+Bookings ||-|{ booking_procedures
+Procedure ||--|{ booking_procedures
+Schedule ||-o{ Bookings
+Staff ||-|| Schedule
+Bookings ||--|{cost_calculation
+cost_calculation ||--|{ Payments
+@enduml
