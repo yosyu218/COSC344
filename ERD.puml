@@ -32,8 +32,8 @@ class Staff {
 
 class Bookings {
     booking_id: integer
-    patient_id: integer
-    staff_id: integer
+    patient_id: integer (Foreign Key)
+    staff_id: integer (Foreign Key)
     timedate: date
     --
     location: string
@@ -53,12 +53,13 @@ class Procedure {
 }
 
 class booking_procedures {
-    booking_id: integer
-    procedure_id: integer
+    booking_id: integer (Foreign Key)
+    procedure_id: integer (Foreign Key)
+    --
 }
 
 class Schedule {
-    booking_id: integer
+    booking_id: integer (Foreign Key)
     timedate: date
     --
     notes: string
@@ -66,7 +67,7 @@ class Schedule {
 }
 
 class Payments {
-    booking_id: integer
+    booking_id: integer (Foreign Key)
     patientID: integer
     --
     total_cost: float
@@ -75,8 +76,8 @@ class Payments {
 }
 
 class cost_calculation {
-    user: string
-    booking_id: integer
+    pateinId: string (Foreign Key)
+    booking_id: integer (Foreign Key)
     --
     age: integer
 }
