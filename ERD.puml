@@ -89,4 +89,5 @@ Schedule ||-o{ Bookings
 Staff ||-|| Schedule
 Bookings ||--|{cost_calculation
 cost_calculation ||--|{ Payments
+Patient ||-|{ Payments
 @enduml
