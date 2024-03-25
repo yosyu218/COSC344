@@ -5,13 +5,13 @@ skinparam Linetype ortho
 
 
 entity "Patient" as patient {
-    patient_id: integer <<PK>>
+    patient_id: varchar <<PK>>
     --
     first_name: varchar(50)
     surname: varchar(50)
     address: varchar(200)
-    email: varchar(100)
-    phone_num: varchar(100)
+    email: varchar(320)
+    phone_num: varchar(25)
     gender: varchar(50)
     DOB: datetime
     AGE<18: boolean
@@ -20,13 +20,13 @@ entity "Patient" as patient {
 }
 
 entity "Staff" as staff {
-    staff_id: integer <<PK>>
+    staff_id: varchar <<PK>>
     --
     first_name: varchar(50)
     surname: varchar(50)
     address: varchar(200) 
-    email: varchar(100)
-    phone_num: varchar(100)
+    email: varchar(320)
+    phone_num: varchar(25)
     position: varchar(100)
     dateofemployment: datetime
     IRDnum: char(9)
@@ -34,18 +34,18 @@ entity "Staff" as staff {
 }
 
 entity "Booking" as booking {
-    booking_id: integer <<PK>>
-    patient_id: integer <<FK>>
-    staff_id: integer <<FK>>
+    booking_id: varchar <<PK>>
+    patient_id: varchar <<FK>>
+    staff_id: varchar <<FK>>
     timedate: datetime
     --
     location: varchar(200)
     notes: varchar(500)
-    procedure_id: integer <<FK>>
+    procedure_id: varchar <<FK>>
 }
 
 entity "Procedure" as procedure {
-    procedure_id: integer <<PK>>
+    procedure_id: varchar <<PK>>
     --
     description: varchar(500)
     quantity: integer
@@ -57,13 +57,13 @@ entity "Procedure" as procedure {
 }
 
 entity "Booking_procedures" as booking_procedures{
-    booking_id: integer <<FK>>
-    procedure_id: integer <<FK>>
+    booking_id: varchar <<FK>>
+    procedure_id: varchar <<FK>>
     --
 }
 
 entity "Schedule" as schedule {
-    booking_id: integer <<FK>>
+    booking_id: varchar <<FK>>
     timedate: datetime
     --
     notes: varchar(200)
@@ -71,8 +71,8 @@ entity "Schedule" as schedule {
 }
 
 entity "Payments" as payments {
-    booking_id: integer <<FK>>
-    patientID: integer <<FK>>
+    booking_id: varchar <<FK>>
+    patientID: varchar <<FK>>
     --
     total_cost: float
     daysinceoperation: integer
@@ -80,8 +80,8 @@ entity "Payments" as payments {
 }
 
 entity "Cost_calculation" as cost_calculation {
-    pateint_id: integer <<FK>>
-    booking_id: integer <<FK>>
+    pateint_id: varchar <<FK>>
+    booking_id: varchar <<FK>>
     --
     age: integer
 }
