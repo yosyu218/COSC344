@@ -4,90 +4,94 @@ skinparam Linetype ortho
 
 
 
-class Patient {
-    patientID: integer 
+entity "Patient" as patient {
+    patient_id: integer <<PK>>
     --
-    name: string
-    address: string
-    email: string
-    phone_num: string
-    gender: string
-    DOB: date
+    first_name: varchar(50)
+    surname: varchar(50)
+    address: varchar(200)
+    email: varchar(100)
+    phone_num: varchar(100)
+    gender: varchar(50)
+    DOB: datetime
     AGE<18: boolean
-    health_cond: string
-    Allergies: string
+    health_cond: varchar(100)
+    Allergies: varchar(100)
 }
 
-class Staff {
-    staffID: integer
+entity "Staff" as staff {
+    staff_id: integer <<PK>>
     --
-    name: string
-    address: string
-    email: string
-    phone_num: string
-    position: string
-    dateofemployment: date
-    IRDnum: string
+    first_name: varchar(50)
+    surname: varchar(50)
+    address: varchar(200) 
+    email: varchar(100)
+    phone_num: varchar(100)
+    position: varchar(100)
+    dateofemployment: datetime
+    IRDnum: char(9)
+    ' IRDnum is either 8 or 9 digits however, if its 8 an 0 is added at the front making it a 9 digit number
 }
 
-class Bookings {
-    booking_id: integer
-    patient_id: integer (Foreign Key)
-    staff_id: integer (Foreign Key)
-    timedate: date
+entity "Booking" as booking {
+    booking_id: integer <<PK>>
+    patient_id: integer <<FK>>
+    staff_id: integer <<FK>>
+    timedate: datetime
     --
-    location: string
-    notes: string
-    procedure_id: integer
+    location: varchar(200)
+    notes: varchar(500)
+    procedure_id: integer <<FK>>
 }
 
-class Procedure {
-    procedure_id: integer
+entity "Procedure" as procedure {
+    procedure_id: integer <<PK>>
     --
-    description: string
+    description: varchar(500)
     quantity: integer
     grams: integer
-    timedate: date
-    cost: float
+    timedate: datetime
+    ' timedate to roughly know how long each procedure takes
+    cost: deciaml(10,2)
     gst: float
 }
 
-class booking_procedures {
-    booking_id: integer (Foreign Key)
-    procedure_id: integer (Foreign Key)
+entity "Booking_procedures" as booking_procedures{
+    booking_id: integer <<FK>>
+    procedure_id: integer <<FK>>
     --
 }
 
-class Schedule {
-    booking_id: integer (Foreign Key)
-    timedate: date
+entity "Schedule" as schedule {
+    booking_id: integer <<FK>>
+    timedate: datetime
     --
-    notes: string
-    bookings: string
+    notes: varchar(200)
+    bookings: varchar(100)
 }
 
-class Payments {
-    booking_id: integer (Foreign Key)
-    patientID: integer
+entity "Payments" as payments {
+    booking_id: integer <<FK>>
+    patientID: integer <<FK>>
     --
     total_cost: float
     daysinceoperation: integer
     pay boolean: boolean
 }
 
-class cost_calculation {
-    pateinId: string (Foreign Key)
-    booking_id: integer (Foreign Key)
+entity "Cost_calculation" as cost_calculation {
+    pateint_id: integer <<FK>>
+    booking_id: integer <<FK>>
     --
     age: integer
 }
-Patient ||-|{ Bookings
-Staff ||--|{ Bookings
-Bookings ||-|{ booking_procedures
-Procedure ||--|{ booking_procedures
-Schedule ||-o{ Bookings
-Staff ||-|| Schedule
-Bookings ||--|{cost_calculation
-cost_calculation ||--|{ Payments
-Patient ||-|{ Payments
+patient ||-|{ booking
+staff ||--|{ booking
+booking ||-|{ booking_procedures
+procedure ||--|{ booking_procedures
+schedule ||-o{ booking
+staff ||-|| schedule
+booking ||--|{cost_calculation
+cost_calculation ||--|{ payments
+patient ||-|{ payments
 @enduml
