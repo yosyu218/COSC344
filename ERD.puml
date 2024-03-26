@@ -38,10 +38,10 @@ entity "Booking" as booking {
     patient_id: varchar <<FK>>
     staff_id: varchar <<FK>>
     timedate: datetime
+    procedure_id: varchar <<FK>>
     --
     location: varchar(200)
     notes: varchar(500)
-    procedure_id: varchar <<FK>>
 }
 
 entity "Procedure" as procedure {
