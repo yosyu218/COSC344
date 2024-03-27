@@ -13,7 +13,7 @@ entity "Patient" as patient {
     email: varchar(320)
     phone_num: varchar(25)
     gender: varchar(50)
-    DOB: datetime
+    DOB: date
     AGE<18: boolean
     health_cond: varchar(100)
     Allergies: varchar(100)
