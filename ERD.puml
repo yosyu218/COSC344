@@ -35,11 +35,11 @@ entity "Staff" as staff {
 
 entity "Booking" as booking {
     booking_id: varchar <<PK>>
+    --
     patient_id: varchar <<FK>>
     staff_id: varchar <<FK>>
     timedate: datetime
     procedure_id: varchar <<FK>>
-    --
     location: varchar(200)
     notes: varchar(500)
 }
@@ -79,19 +79,13 @@ entity "Payments" as payments {
     pay boolean: boolean
 }
 
-entity "Cost_calculation" as cost_calculation {
-    pateint_id: varchar <<FK>>
-    booking_id: varchar <<FK>>
-    --
-    age: integer
-}
+
 patient ||-|{ booking
-staff ||--|{ booking
+staff ||--|{ booking : each booking can have 1 or 2 staff
 booking ||-|{ booking_procedures
 procedure ||--|{ booking_procedures
 schedule ||-o{ booking
 staff ||-|| schedule
-booking ||--|{cost_calculation
-cost_calculation ||--|{ payments
+booking ||--|{payments
 patient ||-|{ payments
 @enduml
