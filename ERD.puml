@@ -28,7 +28,7 @@ entity "Staff" as staff {
     email: varchar(320)
     phone_num: varchar(25)
     position: varchar(100)
-    dateofemployment: datetime
+    dateofemployment: date
     IRDnum: char(9)
     ' IRDnum is either 8 or 9 digits however, if its 8 an 0 is added at the front making it a 9 digit number
 }
