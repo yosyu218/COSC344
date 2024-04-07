@@ -76,8 +76,8 @@ entity "Schedule" as schedule {
 
 entity "Payments" as payments {
     *Booking_id: varchar <<FK>>
-    *Patient_id: varchar <<FK>>
     --
+    *Patient_id: varchar <<FK>>
     *Total_cost: float
     *Daysinceoperation: integer
     *Pay boolean: boolean
