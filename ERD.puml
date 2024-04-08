@@ -45,7 +45,7 @@ entity "Booking" as booking {
     *Timedate: datetime
     *TotalTimeRequired: datetime
     *Location: varchar(200)
-    *schedule_id: varchar <<FK>>
+    *Schedule_id: varchar <<FK>>
     Notes: varchar(500)
 }
 
