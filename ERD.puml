@@ -23,7 +23,7 @@ entity "Patient" as patient {
 entity "Staff" as staff {
     *Staff_id: varchar <<PK>>
     --
-    *schedule_id: varchar <<FK>>
+    *Schedule_id: varchar <<FK>>
     *First_name: varchar(50)
     Middle_name: varchar(50)
     *Surname: varchar(50)
