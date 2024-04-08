@@ -23,6 +23,7 @@ entity "Patient" as patient {
 entity "Staff" as staff {
     *Staff_id: varchar <<PK>>
     --
+    *schedule_id: varchar <<FK>>
     *First_name: varchar(50)
     Middle_name: varchar(50)
     *Surname: varchar(50)
@@ -43,8 +44,8 @@ entity "Booking" as booking {
     *Staff_id: varchar <<FK>>
     *Timedate: datetime
     *TotalTimeRequired: datetime
-    *Procedure_id: varchar <<FK>>
     *Location: varchar(200)
+    *schedule_id: varchar <<FK>>
     Notes: varchar(500)
 }
 
@@ -67,11 +68,11 @@ entity "Booking_procedures" as booking_procedures{
 }
 
 entity "Schedule" as schedule {
-    *Staff_id: varchar <<FK>>
-    *Timedate: datetime
+    *Schedule_id: varchar <<PK>>
     --
+    *Week: datetime
+    *Staff_id: varchar <<FK>>
     Notes: varchar(200)
-    *Booking_id: varchar(100)
 }
 
 entity "Payments" as payments {
@@ -86,10 +87,10 @@ entity "Payments" as payments {
 
 patient ||-|{ booking
 staff ||--|{ booking : each booking can have 1 or 2 staff
-booking ||-|{ booking_procedures
+booking ||--|{ booking_procedures 
 procedure ||--|{ booking_procedures
-schedule ||-o{ booking
+schedule ||-o{ booking 
 staff ||-|| schedule
-booking ||--|{payments
+booking ||--|{payments 
 patient ||-|{ payments
 @enduml
