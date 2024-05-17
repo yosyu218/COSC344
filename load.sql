@@ -4,6 +4,7 @@ drop table if exists consultations;
 drop table if exists patient;
 drop table if exists Schedule;
 drop table if exists Dental_staff;
+
 Create table patient(
 patient_id varchar(15),
 Firstname varchar(100) not null,
@@ -18,7 +19,7 @@ primary key(patient_id)
 
 create table patientConditions(
 patient_id varchar(15),
-condition_name varchar(50),
+condition_name varchar(800),
 primary key(patient_id, condition_name),
 Foreign key(patient_id) references patient(patient_id)
 -- Foreign key(condition_id) references conditions(condition_id)
@@ -38,7 +39,7 @@ Address varchar(200) not null,
 email varchar(200) not null,
 Date_hired Date not null,
 Position varchar(100) not null,
-IRD_Number varchar(15) unique,
+IRD_Number varchar(15) unique not null,
 primary key(staff_id)
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE consultations (
     consultation_date DATE NOT NULL,
     start_Time TIME NOT NULL,
     end_Time TIME NOT NULL,
-    notes VARCHAR(500),
+    notes VARCHAR(800),
     payment_Status VARCHAR(100) CHECK (payment_Status IN ('paid', 'not paid')),
     Due_Date Date not null,
     Patient_id varchar(15) not null,
@@ -59,7 +60,7 @@ CREATE TABLE consultations (
 
 Create table Schedule(
 Procedure_code varchar(20),
-Description varchar(500) not null,
+Description varchar(800) not null,
 Unit_Type varchar(100) not null,
 Unit_cost decimal(10,2) not null,
 primary key(procedure_code)
