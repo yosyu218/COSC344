@@ -19,7 +19,8 @@ primary key(patient_id)
 
 create table patientConditions(
 patient_id varchar(15),
-condition_name varchar(800),
+condition_name varchar(200),
+condition_notes varchar(999),
 primary key(patient_id, condition_name),
 Foreign key(patient_id) references patient(patient_id)
 -- Foreign key(condition_id) references conditions(condition_id)
@@ -49,12 +50,12 @@ CREATE TABLE consultations (
     start_Time TIME NOT NULL,
     end_Time TIME NOT NULL,
     notes VARCHAR(800),
-    payment_Status VARCHAR(100) CHECK (payment_Status IN ('paid', 'not paid')),
-    Due_Date Date not null,
-    Patient_id varchar(15) not null,
-    staff_id varchar(15) not null,
+    payment_Status VARCHAR(100) DEFAULT 'not paid' CHECK (payment_Status IN ('paid', 'not paid')),
+    Due_Date DATE NOT NULL,
+    Patient_id VARCHAR(15) NOT NULL,
+    staff_id VARCHAR(15) NOT NULL,
     PRIMARY KEY (consultations_id),
-	FOREIGN KEY (Patient_id) REFERENCES patient(patient_id),
+    FOREIGN KEY (Patient_id) REFERENCES patient(patient_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
 
@@ -127,4 +128,5 @@ SELECT * FROM Schedule;
 
 -- Select statement for the procedures table:
 SELECT * FROM procedures;
+
 
