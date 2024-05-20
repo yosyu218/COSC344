@@ -32,7 +32,7 @@ Foreign key(patient_id) references patient(patient_id)
 -- notes varchar(200),
 -- primary key(condition_id)
 -- )
-create table Dental_staff(
+create table dental_staff(
 staff_id varchar(15),
 Firstname varchar(100) not null,
 Lastname varchar(100) not null,
@@ -56,10 +56,10 @@ CREATE TABLE consultations (
     staff_id VARCHAR(15) NOT NULL,
     PRIMARY KEY (consultations_id),
     FOREIGN KEY (Patient_id) REFERENCES patient(patient_id),
-    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+    FOREIGN KEY (staff_id) REFERENCES dental_staff(staff_id)
 );
 
-Create table Schedule(
+Create table schedule(
 Procedure_code varchar(20),
 Description varchar(800) not null,
 Unit_Type varchar(100) not null,
@@ -88,7 +88,7 @@ VALUES
 ('P002', 'Asthma');
 
 -- Mock data for Dental_staff table
-INSERT INTO Dental_staff (staff_id, Firstname, Lastname, Address, email, Date_hired, Position, IRD_Number) 
+INSERT INTO dental_staff (staff_id, Firstname, Lastname, Address, email, Date_hired, Position, IRD_Number) 
 VALUES 
 ('S001', 'Michael', 'Johnson', '789 Elm St', 'michael.johnson@example.com', '2018-03-10', 'Dentist', '123-456-789'),
 ('S002', 'Emily', 'Williams', '987 Pine St', 'emily.williams@example.com', '2019-01-15', 'Dental Assistant', '987-654-321');
@@ -100,7 +100,7 @@ VALUES
 ('C002', '2024-04-27', '14:00:00', '15:00:00', 'Tooth extraction', 'not paid', '2024-04-27', 'P002', 'S002');
 
 -- Mock data for Schedule table
-INSERT INTO Schedule (Procedure_code, Description, Unit_Type, Unit_cost) 
+INSERT INTO schedule (Procedure_code, Description, Unit_Type, Unit_cost) 
 VALUES 
 ('P001', 'Dental cleaning', 'Hour', 150.00),
 ('P002', 'Tooth extraction', 'Procedure', 300.00);
@@ -118,15 +118,18 @@ SELECT * FROM patient;
 SELECT * FROM patientConditions;
 
 -- Select statement for the Dental_staff table:
-SELECT * FROM Dental_staff;
+SELECT * FROM dental_staff;
 
 -- Select statement for the consultations table:
 SELECT * FROM consultations;
 
 -- Select statement for the Schedule table:
-SELECT * FROM Schedule;
+SELECT * FROM schedule;
 
 -- Select statement for the procedures table:
 SELECT * FROM procedures;
+
+commit;
+
 
 
